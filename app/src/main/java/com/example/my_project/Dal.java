@@ -121,19 +121,19 @@ public class Dal extends SQLiteAssetHelper {
 
     }
 
-    public void updateOrder(String newOrder, String newSum, String businessName) {
+    public void updateOrder(String newOrder, String newSum, String businessName, String date, String agent) {
         SQLiteDatabase db = getWritableDatabase();
-        String st = "UPDATE clients set info='"+ newOrder + "' ,sum='" + newSum + "' WHERE name='" + businessName + "'";
+        String st = "UPDATE clients set info='"+ newOrder + "', sum='" + newSum + "', has_paid='true' WHERE name='" + businessName + "' and date ='" + date + "' and agent='" + agent + "'";
         SQLiteStatement statement = db.compileStatement(st);
         statement.execute();
 
 
     }
 
-    public ReportCard getReport(String date) {
+    public ReportCard getReport(String date, String agent) {
         ReportCard report = new ReportCard();
 
-        String st = "select * from reports Where date='" + date + "'";
+        String st = "select * from reports Where date='" + date + "' and agent_name='" + agent + "'";
         SQLiteDatabase db = getWritableDatabase();
 
         Cursor cursor = db.rawQuery(st, null);
@@ -144,7 +144,9 @@ public class Dal extends SQLiteAssetHelper {
             report.setSum(cursor.getString(cursor.getColumnIndex("sum")));
 
 
+
         }
+        Log.w("myApp", report.toString());
         return report;
     }
 
@@ -163,33 +165,19 @@ public class Dal extends SQLiteAssetHelper {
     }
 
 
-    public void updateOrder(String newSum, String date) {
+    public void updateReport(String newSum, String date) {
         SQLiteDatabase db = getWritableDatabase();
-        String st = "UPDATE reports set sum='" + newSum + "' WHERE date'" + date + "'";
+        Log.w("myApp", newSum);
+
+        String st = "UPDATE reports set sum='" + newSum + "' WHERE date='" + date + "'";
         SQLiteStatement statement = db.compileStatement(st);
         statement.execute();
 
 
     }
-    public int getSum(String date)
-    {
-        int sum =0;
-        String st = "select * from reports Where date='" + date + "'";
-        SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(st, null);
-        while (cursor.moveToNext()) {
-
-            sum = Integer.parseInt(cursor.getString(cursor.getColumnIndex("sum")));
-
-
-        }
-        return sum;
-    }
-
-
-    public boolean checkIfReportExist(String date) {
-        String st = "select * from reports";
+    public boolean checkIfReportExist(String date, String agent) {
+        String st = "select * from reports Where agent_name='" + agent + "'";
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery(st, null);
         while (cursor.moveToNext()) {
@@ -200,5 +188,31 @@ public class Dal extends SQLiteAssetHelper {
         return false;
     }
 
+    public void UpdatePayed(String name, String currDate, String agent) {
+        {
+            SQLiteDatabase db = getWritableDatabase();
+            String st = "UPDATE clients set has_paid='true' WHERE name='" + name + "' and date='" + currDate + "' and agent='"+ agent  + "'";
+            SQLiteStatement statement = db.compileStatement(st);
+            statement.execute();
+
+        }
+    }
+
+    public boolean hasPaid(String name, String currDate, String agent) {
+        String st = "Select * from clients  WHERE name='" + name + "' and date='" + currDate + "' and agent='"+ agent  + "'";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(st, null);
+        Log.w("myApp",cursor.toString());
+        while (cursor.moveToNext())
+        {
+            Log.w("myApp",  cursor.getString(cursor.getColumnIndex("has_paid")) + " == " + "true");
+
+            if(cursor.getString(cursor.getColumnIndex("has_paid")).equals("true"))
+         {
+             return true;
+         }
+        }
+        return false;
+    }
 }
 

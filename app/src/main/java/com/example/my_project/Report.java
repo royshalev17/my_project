@@ -44,8 +44,8 @@ public class Report extends AppCompatActivity {
     private void setSum()
     {
         Dal dal = new Dal(Report.this);
-        Log.w("myApp", "Total sum: " + dal.getReport(currDate).getSum());
-        total_sum.setText("Total sum: " + dal.getReport(currDate).getSum());
+        Log.w("myApp", "Total sum: " + dal.getReport(currDate, currAgent).getSum());
+        total_sum.setText("Total sum: " + dal.getReport(currDate, currAgent).getSum());
     }
     private void setClientsnames()
     {

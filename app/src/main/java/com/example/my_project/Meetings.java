@@ -60,9 +60,10 @@ ArrayList<Client> clientsIn;
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent clientPage = new Intent(Meetings.this, ClientInfo.class);
             clientPage.putExtra("Client", clientsIn.get(position).toString());
-            clientPage.putExtra("sum", clientsIn.get(position).getSumOfMoney());
+            clientPage.putExtra("sum", "" + clientsIn.get(position).getSumOfMoney());
             clientPage.putExtra("date",currDate);
             clientPage.putExtra("name", clientsIn.get(position).getClientName());
+            clientPage.putExtra("currAgent", currAgent);
             startActivity(clientPage);
         }
     };

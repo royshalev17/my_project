@@ -51,7 +51,7 @@ public class AddClient extends AppCompatActivity {
         SumStr = Sum.getText().toString();
         AddressStr = Address.getText().toString();
         PhoneStr = Phone.getText().toString();
-        if(!ClientDal.checkIfReportExist(Date))
+        if(!ClientDal.checkIfReportExist(Date, currentAgent))
         {
             ClientDal.addReport(currentAgent, "0", Date);
         }
