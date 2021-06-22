@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddAgent extends AppCompatActivity {
 String userNameStr;
@@ -26,8 +27,19 @@ EditText password;
     }
     public void addNewAgent(View view)
     {
+        Dal AgentDal = new Dal(AddAgent.this);
         userNameStr = userName.getText().toString();
         passwordStr = password.getText().toString();
+        if (AgentDal.Check_If_Agent_Exists(userNameStr))
+        {
+            Toast.makeText(this, "This username is already taken!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            AgentDal.addAgent(userNameStr, passwordStr);
+            Toast.makeText(this, "Agent: " + userNameStr + "has been added successfully!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }

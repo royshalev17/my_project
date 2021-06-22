@@ -7,7 +7,9 @@ public class Client {
     private String address;
     private String phoneNumber;
     private Boolean hasPaid;
-    public Client(String clientNameIn, String orderInfoIn, int sumOfMoneyIn, String addressIn, String phoneNumberIn)
+    private String date;
+    String creator;
+    public Client(String clientNameIn, String orderInfoIn, int sumOfMoneyIn, String addressIn, String phoneNumberIn, String date,String creator)
     {
         this.clientName = clientNameIn;
         this.orderInfo = orderInfoIn;
@@ -15,6 +17,30 @@ public class Client {
         this.address = addressIn;
         this.phoneNumber = phoneNumberIn;
         hasPaid = false;
+        this.date = date;
+        this.creator = creator;
+    }
+
+    public Client(){}
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getOrderInfo() {
+        return orderInfo;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getClientName() {
@@ -29,8 +55,28 @@ public class Client {
         return sumOfMoney;
     }
 
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public void setHasPaid(Boolean hasPaid) {
         this.hasPaid = hasPaid;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setOrderInfo(String orderInfo) {

@@ -13,6 +13,9 @@ public class ClientInfo extends AppCompatActivity {
     Intent i = null;
     String clientToShow = "";
     TextView clientShowHolder;
+    String currDate;
+    String sum;
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,9 @@ public class ClientInfo extends AppCompatActivity {
         i = getIntent();
         prev = new Intent(this,Meetings.class);
         clientToShow = i.getStringExtra("Client");
+        currDate = i.getStringExtra("date");
+        sum = i.getStringExtra("sum");
+        name = i.getStringExtra("name");
   
         clientShowHolder.setText(clientToShow);
 
@@ -32,9 +38,15 @@ public class ClientInfo extends AppCompatActivity {
 
     public void mtPartPay(View view) {
         Intent partPayPage = new Intent(this, PartialPayment.class);
+        partPayPage.putExtra("name", name);
         startActivity(partPayPage);
     }
     public void returnToPrev(View view) {
-        startActivity(prev);
+        finish();
+    }
+
+    public void updatePayment(View view) {
+        Dal dal =new Dal(ClientInfo.this);
+        dal.updateOrder("" + (dal.getSum(currDate) + Integer.parseInt(sum)), currDate);
     }
 }

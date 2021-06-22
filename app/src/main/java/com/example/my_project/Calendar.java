@@ -16,10 +16,14 @@ import java.util.Date;
 public class Calendar extends AppCompatActivity {
 CalendarView cal;
 String date;
+Intent PrevPage;
+String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+        PrevPage = getIntent();
+        userName = PrevPage.getStringExtra("currUser");
         cal = (CalendarView) findViewById(R.id.calendarView);
         date = "";
         cal.setOnDateChangeListener(calListener);
@@ -56,8 +60,19 @@ String date;
     };
 
     public void viewDate(View view) {
-        Intent MeetingsPage = new Intent(this,Meetings.class);
-        MeetingsPage.putExtra("date" , date);
-        startActivity(MeetingsPage);
+
+        Dal dal = new Dal(Calendar.this);
+        if (dal.isManager(userName))
+        {
+            PrevPage = new Intent(this, AgentList.class);
+        }
+        else
+            PrevPage = new Intent(this, Meetings.class);
+
+        PrevPage.putExtra("username", userName);
+        PrevPage.putExtra("date" , date);
+        Log.d("ttty", "viewDate: " + userName);
+
+        startActivity(PrevPage);
     }
 }

@@ -8,10 +8,22 @@
     tools:context=".AgentList">
 
     <ImageButton
+        android:id="@+id/calenBtn2"
+        android:layout_width="68dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="4dp"
+        android:onClick="openCldr"
+        app:layout_constraintBottom_toTopOf="@+id/agents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <ImageButton
         android:id="@+id/addClientBtn2"
         android:layout_width="85dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="28dp"
         android:background="#ffffd5"
         android:onClick="mtAddAgent"
         android:tint="#E15454"
@@ -24,11 +36,33 @@
         android:id="@+id/agents"
         android:layout_width="412dp"
         android:layout_height="530dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/addClientBtn2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Agents"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/calenBtn2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateDesplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meetingsDate" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
